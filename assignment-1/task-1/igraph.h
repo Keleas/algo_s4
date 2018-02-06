@@ -1,11 +1,22 @@
-struct IGraph {
-    virtual ~IGraph() {}
+#ifndef IGRAPH_H
+#define IGRAPH_H
 
-    // Добавление ребра от from к to.
+#include <vector>
+
+using std::vector;
+
+class IGraph {
+public:
+    virtual ~IGraph()
+    {}
+
     virtual void AddEdge(int from, int to) = 0;
 
-    virtual int VerticesCount() const  = 0;
+    virtual int VerticesCount() const =  0;
 
-    virtual void GetNextVertices(int vertex, std::vector<int>& vertices) const = 0;
-    virtual void GetPrevVertices(int vertex, std::vector<int>& vertices) const = 0;
+    virtual void GetNextVertices(int vertex, vector<int>& vertices) const = 0;
+
+    virtual void GetPrevVertices(int vertex, vector<int>& vertices) const = 0;
 };
+
+#endif // IGRAPH_H
