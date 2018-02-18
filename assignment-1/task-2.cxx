@@ -32,16 +32,6 @@
 создаем структуру Edge.
 
 Граф реализован через предстваления массива с хэш-таблицей
-
-Доказательство:
-
-Оценим время работы для входного графа G = (V, E), где множество ребер E
-представлено списком смежности. В очередь добавляются только непосещенные
-вершины, поэтому каждая вершина посещается не более одного раза. Операции
-внесения в очередь и удаления из нее требуют O(1) времени, так что общее время
-работы с очередью составляет O(V) операций. Время, используемое на работу с
-ребрами, составляет O(E). Поэтому общее время работы алгоритма поиска
-в ширину - O(V + E)
 ****************************************************************************/
 
 #include <iostream>
@@ -66,7 +56,7 @@ public:
     //добавить ребро графа
     void AddEdge(int from, int to);
 
-    //слдеующие вершины графа за исходным
+    //следующие вершины графа за исходным
     void GetNextVertices(int vertex, vector<int>& vertices) const;
 
     //количество врешин графа
@@ -75,7 +65,6 @@ public:
     //поиск минимального цикла
     int minCycle();
 private:
-    //ребро
     struct Edge
     {
         Edge();
@@ -94,6 +83,7 @@ private:
     vector<unordered_set<int>> out_;
 };
 
+/*************************************************************/
 
 Graph::Graph(unsigned int verticesNumber) :
     verticesNumber_{verticesNumber},
@@ -106,6 +96,7 @@ Graph::Edge::Edge() :
     visited{false}
 {}
 
+/*************************************************************/
 
 void Graph::AddEdge(int from, int to)
 {
@@ -160,7 +151,7 @@ int Graph::BFS(int vertex) {
                 verticesStates[i].depth = verticesStates[currentVertex].depth + 1; //глубина состоит из глубины отца + своя
                 verticesStates[i].father = currentVertex;
             }
-            else if (i != verticesStates[currentVertex].father)  //круг
+            else if (i != verticesStates[currentVertex].father)  //цикл
                 return verticesStates[currentVertex].depth + verticesStates[i].depth + 1;
 
         }

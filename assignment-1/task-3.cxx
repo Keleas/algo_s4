@@ -33,16 +33,6 @@
 создаем структуру Edge.
 
 Граф реализован через масив списков смежности. Занимает меньшего всего места.
-
-Доказательство:
-
-Оценим время работы для входного графа G = (V, E), где множество ребер E
-представлено списком смежности. В очередь добавляются только непосещенные
-вершины, поэтому каждая вершина посещается не более одного раза. Операции
-внесения в очередь и удаления из нее требуют O(1) времени, так что общее время
-работы с очередью составляет O(V) операций. Время, используемое на работу с
-ребрами, составляет O(E). Поэтому общее время работы алгоритма поиска
-в ширину - O(V + E)
 ****************************************************************************/
 
 #include <iostream>
@@ -67,7 +57,7 @@ public:
     //добавить ребро графа
     void AddEdge(int from, int to);
 
-    //слдеующие вершины графа за исходным
+    //следующие вершины графа за исходным
     void GetNextVertices(int vertex, vector<int>& vertices) const;
 
     //количество вершин графа
@@ -77,7 +67,6 @@ public:
     int countMinPaths(int from, int to);
 
 private:
-    //ребро
     struct Edge
     {
         Edge();
@@ -92,6 +81,7 @@ private:
     vector<list<int>> out_;
 };
 
+/*************************************************************/
 
 Graph::Graph(unsigned int verticesNumber) :
     verticesNumber_{verticesNumber},
@@ -104,6 +94,7 @@ Graph::Edge::Edge() :
     path{0}
 {}
 
+/*************************************************************/
 
 void Graph::AddEdge(int from, int to)
 {
@@ -148,7 +139,8 @@ int Graph::countMinPaths(int from, int to) {
                 verticesStates[i].depth = verticesStates[currentVertex].depth + 1; //глубина состоит из глубины отца + своя
                 verticesStates[i].path = verticesStates[currentVertex].path; //количество путей совпадает с отцом
             }
-            else if (verticesStates[i].depth == verticesStates[currentVertex].depth + 1) //круг
+            else if (verticesStates[i].depth ==
+                           verticesStates[currentVertex].depth + 1) // найден другой путь к этой вершине
                 verticesStates[i].path += verticesStates[currentVertex].path;
         }
     }
