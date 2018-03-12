@@ -135,7 +135,7 @@ int Graph::countMinPaths(int from, int to) {
         //перебор вершин следующих за данной
         for (int i : nextVertices) {
             if (verticesStates[i].path == 0) {
-                verticesQueue.push(i); //добавляем в queue для послдующей проверки
+                verticesQueue.push(i); //добавляем в queue для последующей проверки
                 verticesStates[i].depth = verticesStates[currentVertex].depth + 1; //глубина состоит из глубины отца + своя
                 verticesStates[i].path = verticesStates[currentVertex].path; //количество путей совпадает с отцом
             }
